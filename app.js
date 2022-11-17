@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const usersRouter = require("./routers/users");
 const tasksRouter = require("./routers/tasks");
 require("dotenv").config();
@@ -11,6 +12,7 @@ mongoose
     const app = express();
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
+    app.use(cors());
     app.use("/", usersRouter);
     app.use("/", tasksRouter);
     app.listen(process.env.PORT, () => {

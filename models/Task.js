@@ -5,6 +5,7 @@ const Task = model(
   new Schema({
     _id: Number,
     username: String,
+    name: String,
     date: Date,
     completed: Boolean,
   }),
