@@ -34,7 +34,7 @@ const getAllTasks = async (username) => {
   const tasks = await Task.find({
     username: username,
   });
-  return await tasks.toArray();
+  return tasks;
 };
 
 const deleteTask = async (username, _id) => {
