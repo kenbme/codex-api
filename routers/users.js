@@ -38,12 +38,14 @@ router.post(
         request.body.password
       );
       if (user) {
-        response.status(200).send("User has been created.");
+        response.status(201).json({ message: "User has been created." });
       } else {
-        response.status(409).send("Username/Email already registered.");
+        response
+          .status(409)
+          .json({ message: "Username/Email already registered." });
       }
     } else {
-      response.status(400).send(errors);
+      response.status(400).json(errors);
     }
   }
 );
@@ -64,7 +66,7 @@ router.post(
       if (token) {
         response.status(200).json({ token: token });
       } else {
-        response.status(403).send("Wrong username/password.");
+        response.status(403).json({ message: "Wrong username/password." });
       }
     } else {
       response.status(400).json(errors);
@@ -84,7 +86,7 @@ router.get("/users/:username", verifyToken, async (request, response) => {
 
 router.delete("/users/:username", verifyToken, async (request, response) => {
   const user = await usersService.deleteUser(request.username);
-  response.status(200).send("User has been deleted.");
+  response.status(200).json({ message: "User has been deleted." });
 });
 
 router.put(
@@ -116,9 +118,9 @@ router.put(
         request.body.password
       );
       if (user) {
-        response.status(200).send("User has been updated.");
+        response.status(200).json({ message: "User has been updated." });
       } else {
-        response.status(409).send("Email already in use");
+        response.status(409).json({ message: "Email already in use." });
       }
     } else {
       response.status(400).json(errors);

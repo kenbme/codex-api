@@ -23,9 +23,9 @@ router.post(
         request.body.name,
         request.body.date
       );
-      response.status(200).send("Task created");
+      response.status(201).json({ message: "Task created." });
     } else {
-      response.status(400).send(errors);
+      response.status(400).json(errors);
     }
   }
 );
@@ -42,19 +42,19 @@ router.delete(
         request.params.task
       );
       if (task) {
-        response.status(200).send(task);
+        response.status(200).json(task);
       } else {
-        response.status(404).send("Task not found.");
+        response.status(404).json({ message: "Task not found." });
       }
     } else {
-      response.status(400).send(errors);
+      response.status(400).json(errors);
     }
   }
 );
 
 router.get("/users/:username/tasks", verifyToken, async (request, response) => {
   const tasks = await tasksService.getAllTasks(request.params.username);
-  response.status(200).send(tasks);
+  response.status(200).json(tasks);
 });
 
 router.put(
@@ -75,12 +75,12 @@ router.put(
         request.body.completed
       );
       if (task) {
-        response.status(200).send(task);
+        response.status(200).json(task);
       } else {
-        response.status(404).send("Task not found.");
+        response.status(404).json({ message: "Task not found." });
       }
     } else {
-      response.status(400).send(errors);
+      response.status(400).json(errors);
     }
   }
 );
@@ -97,12 +97,12 @@ router.get(
         request.params.task
       );
       if (task) {
-        response.status(200).send(task);
+        response.status(200).json(task);
       } else {
-        response.status(404).send("Task not found.");
+        response.status(404).json({ message: "Task not found." });
       }
     } else {
-      response.status(400).send(errors);
+      response.status(400).json(errors);
     }
   }
 );
